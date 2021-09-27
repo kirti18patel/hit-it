@@ -22,9 +22,9 @@ export default {
       level: 1
     },
     paddleProps: {
-      height: 20,
-      width: 100,
+      height: 30,
+      width: 200,
       x: 100,
-      color: "orange"
+      colors:  ["red", "white"]
     }
   };

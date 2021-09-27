@@ -1,6 +1,8 @@
 import React, {useEffect, useRef} from 'react';
 import { BallControl } from './BallControl';
 import data from "../../db";
+import CheckWallCollision from '../../utils/CheckWallCollision';
+import Paddle from './Paddle';
 
 const Board = () => {
     const canvas_Ref = useRef(null);
@@ -11,14 +13,13 @@ const Board = () => {
             const ctx = cvs.getContext('2d');
             ctx.clearRect(0, 0, cvs.width, cvs.height);
 
-            let {ballProps} = data;
+            let {ballProps, paddleProps} = data;
+            // start ball movement based on its position
             BallControl(ctx, ballProps);
-            if(ballProps.y - ballProps.radius > cvs.height || ballProps.y - ballProps.radius < 0){
-                ballProps.dy *= -1;
-            }
-            if(ballProps.x - ballProps.radius > cvs.width || ballProps.x - ballProps.radius < 0){
-                ballProps.dx *= -1;
-            }
+            // check if ball collide with ball and if yes deflect it
+            CheckWallCollision(ballProps, cvs);
+            // create paddle on canvas
+            Paddle(ctx, cvs, paddleProps);
             requestAnimationFrame(createBall);
         };
         createBall();
