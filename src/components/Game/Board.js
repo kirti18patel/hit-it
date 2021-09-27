@@ -30,7 +30,7 @@ const Board = () => {
             // start ball movement based on its position
             BallControl(ctx, ballProps);
             // check if ball collide with ball and if yes then deflect it
-            CheckWallCollision(ballProps, cvs);
+            CheckWallCollision(ballProps, cvs, player);
             
             paddleProps.y = cvs.height - 50;
             // create paddle on canvas
