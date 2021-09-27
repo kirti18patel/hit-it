@@ -24,6 +24,6 @@ export default {
       y: 50,
       height: 30,
       density: 2,
-      colors: ["red", "white"]
+      color: "white"
     }
   };

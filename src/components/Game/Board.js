@@ -4,11 +4,12 @@ import data from "../../db";
 import CheckWallCollision from '../../utils/CheckWallCollision';
 import Paddle from './Paddle';
 import Brick from './Brick';
+import BrickCollisionWithBall from '../../utils/BrickCollisionWithBall';
 
 const Board = () => {
     const canvas_Ref = useRef(null);
 
-    let {ballProps, paddleProps, brickProps} = data;
+    let {ballProps, paddleProps, brickProps, player} = data;
     let bricksArr =[];
     useEffect(()=>{
         const createBall = () => {
@@ -30,6 +31,23 @@ const Board = () => {
             CheckWallCollision(ballProps, cvs);
             // create paddle on canvas
             Paddle(ctx, cvs, paddleProps);
+
+            let brick_collision;
+            for (let i = 0; i < bricksArr.length; i++) {
+                brick_collision = BrickCollisionWithBall(ballProps, bricksArr[i]);
+                
+                if (brick_collision.hit && !bricksArr[i].broke) {
+                  console.log(brick_collision, bricksArr[i].broke);
+                  if (brick_collision.axis === "X") {
+                    ballProps.dx *= -1;
+                    bricksArr[i].broke = true;
+                  } else if (brick_collision.axis === "Y") {
+                    ballProps.dy *= -1;
+                    bricksArr[i].broke = true;
+                  }
+                  player.score += 10;
+                }
+              }
             requestAnimationFrame(createBall);
         };
         createBall();
