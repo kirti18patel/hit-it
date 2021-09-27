@@ -97,7 +97,9 @@ span:hover::before{
 
 /* canvas design */
 #canvas {
-  background-color: rgba(19, 73, 89, 0.7);
+  background-image: url("https://img.freepik.com/free-photo/abstract-grunge-decorative-relief-navy-blue-stucco-wall-texture-wide-angle-rough-colored-background_1258-28311.jpg?size=626&ext=jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .gameHeader {
