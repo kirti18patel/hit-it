@@ -11,7 +11,14 @@ const Board = () => {
             const ctx = cvs.getContext('2d');
             ctx.clearRect(0, 0, cvs.width, cvs.height);
 
-            BallControl(ctx, data.ballProps);
+            let {ballProps} = data;
+            BallControl(ctx, ballProps);
+            if(ballProps.y - ballProps.radius > cvs.height || ballProps.y - ballProps.radius < 0){
+                ballProps.dy *= -1;
+            }
+            if(ballProps.x - ballProps.radius > cvs.width || ballProps.x - ballProps.radius < 0){
+                ballProps.dx *= -1;
+            }
             requestAnimationFrame(createBall);
         };
         createBall();
