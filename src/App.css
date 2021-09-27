@@ -94,3 +94,14 @@ span:hover::before{
     text-align: center;
     color: white;
 }
+
+/* canvas design */
+#canvas {
+  background-color: rgba(19, 73, 89, 0.7);
+}
+
+.gameHeader {
+  font-family: "Sedgwick Ave", cursive;
+  color: white;
+  font-size: 40px;
+}

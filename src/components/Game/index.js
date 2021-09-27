@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import Board from './Board.js';
 
 function Game() {
     return (
         <div>
-            <h1>game</h1>
+            <Board />
         </div>
     )
 }
