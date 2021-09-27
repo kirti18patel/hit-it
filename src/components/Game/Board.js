@@ -5,6 +5,7 @@ import CheckWallCollision from '../../utils/CheckWallCollision';
 import Paddle from './Paddle';
 import Brick from './Brick';
 import BrickCollisionWithBall from '../../utils/BrickCollisionWithBall';
+import PaddleCollisionWithBall from './PaddleCollisionWithBall';
 
 const Board = () => {
     const canvas_Ref = useRef(null);
@@ -29,6 +30,8 @@ const Board = () => {
             BallControl(ctx, ballProps);
             // check if ball collide with ball and if yes then deflect it
             CheckWallCollision(ballProps, cvs);
+            
+            paddleProps.y = cvs.height - 50;
             // create paddle on canvas
             Paddle(ctx, cvs, paddleProps);
 
@@ -37,17 +40,19 @@ const Board = () => {
                 brick_collision = BrickCollisionWithBall(ballProps, bricksArr[i]);
                 
                 if (brick_collision.hit && !bricksArr[i].broke) {
-                  console.log(brick_collision, bricksArr[i].broke);
-                  if (brick_collision.axis === "X") {
-                    ballProps.dx *= -1;
-                    bricksArr[i].broke = true;
-                  } else if (brick_collision.axis === "Y") {
-                    ballProps.dy *= -1;
-                    bricksArr[i].broke = true;
-                  }
-                  player.score += 10;
+                    if (brick_collision.axis === "X") {
+                        ballProps.dx *= -1;
+                        bricksArr[i].broke = true;
+                    } else if (brick_collision.axis === "Y") {
+                        ballProps.dy *= -1;
+                        bricksArr[i].broke = true;
+                    }
+                    player.score += 10;
                 }
               }
+
+              PaddleCollisionWithBall(ballProps, paddleProps);
+
             requestAnimationFrame(createBall);
         };
         createBall();

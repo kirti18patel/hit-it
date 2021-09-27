@@ -1,8 +1,8 @@
 export default (ctx, cvs, paddleProps) => {
     class Paddle {
       constructor(x) {
-        this.x = x;
-        this.y = cvs.height - 50;
+        this.x = paddleProps.x;
+        this.y = paddleProps.y;
         this.height = paddleProps.height;
         this.width = paddleProps.width;
         this.colors = paddleProps.colors;
@@ -21,7 +21,7 @@ export default (ctx, cvs, paddleProps) => {
       }
     }
   
-    let paddle = new Paddle(paddleProps.x);
+    let paddle = new Paddle();
     paddle.move();
     if (paddleProps.x <= 0) {
       paddleProps.x = 0;
