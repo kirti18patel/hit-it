@@ -3,17 +3,27 @@ import { BallControl } from './BallControl';
 import data from "../../db";
 import CheckWallCollision from '../../utils/CheckWallCollision';
 import Paddle from './Paddle';
+import Brick from './Brick';
 
 const Board = () => {
     const canvas_Ref = useRef(null);
 
-    let {ballProps, paddleProps} = data;
+    let {ballProps, paddleProps, brickProps} = data;
+    let bricksArr =[];
     useEffect(()=>{
         const createBall = () => {
             const cvs = canvas_Ref.current;
             const ctx = cvs.getContext('2d');
             ctx.clearRect(0, 0, cvs.width, cvs.height);
-            
+            let brickToDisplay = Brick(2, bricksArr, cvs, brickProps);
+            if (brickToDisplay && brickToDisplay.length>0){
+                bricksArr = brickToDisplay;
+            }
+
+            bricksArr.map((brick) => {
+                return brick.draw(ctx);
+            })
+
             // start ball movement based on its position
             BallControl(ctx, ballProps);
             // check if ball collide with ball and if yes then deflect it
@@ -26,14 +36,14 @@ const Board = () => {
     }, [])
 
     const handlePaddleMouse = event => {
-        paddleProps.x = event.clientX;
+        paddleProps.x = event.clientX-paddleProps.width/2;
     }
 
     const handlePaddleKey = event => {
         if(event.code === "ArrowRight"){
             paddleProps.x +=20;
         }
-        if(event.code === "ArrowLeft"){
+        else if(event.code === "ArrowLeft"){
             paddleProps.x -=20;
         }
     }
