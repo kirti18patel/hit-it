@@ -21,7 +21,7 @@ export default {
     },
     brickProps: {
       x: 0.5,
-      y: 50,
+      y: 70,
       height: 30,
       density: 2,
       color: "white"

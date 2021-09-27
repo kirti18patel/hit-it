@@ -6,6 +6,7 @@ import Paddle from './Paddle';
 import Brick from './Brick';
 import BrickCollisionWithBall from '../../utils/BrickCollisionWithBall';
 import PaddleCollisionWithBall from './PaddleCollisionWithBall';
+import PlayerRecord from './PlayerRecord';
 
 const Board = () => {
     const canvas_Ref = useRef(null);
@@ -49,10 +50,11 @@ const Board = () => {
                     }
                     player.score += 10;
                 }
-              }
+            }
 
-              PaddleCollisionWithBall(ballProps, paddleProps);
+            PaddleCollisionWithBall(ballProps, paddleProps);
 
+            PlayerRecord(ctx, player, cvs);
             requestAnimationFrame(createBall);
         };
         createBall();
