@@ -119,13 +119,16 @@ const Board = () => {
         }
     }
 
+    async function takeScreenshotCanvas() {}
+
     // return canvas with reference and event handlers
     return <canvas ref={canvas_Ref} 
     id="canvas" tabIndex="0"
     height={window.innerHeight} 
     width={window.innerWidth}
     onMouseMove={handlePaddleMouse} 
-    onKeyDown={handlePaddleKey}></canvas>
+    onKeyDown={handlePaddleKey}
+    onDoubleClick={takeScreenshotCanvas}></canvas>
 }
 
 export default Board;
