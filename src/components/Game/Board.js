@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { BallControl } from './BallControl';
 import data from "../../db";
 import CheckWallCollision from '../../utils/CheckWallCollision';
@@ -8,6 +8,7 @@ import BrickCollisionWithBall from '../../utils/BrickCollisionWithBall';
 import PaddleCollisionWithBall from './PaddleCollisionWithBall';
 import PlayerRecord from './PlayerRecord';
 import AllBricksBroken from '../../utils/AllBricksBroken';
+import ResetGame from "../../utils/ResetGame";
 
 const Board = () => {
     const canvas_Ref = useRef(null);
@@ -58,6 +59,23 @@ const Board = () => {
             PlayerRecord(ctx, player, cvs);
 
             AllBricksBroken(bricksArr, cvs, ballProps, player);
+
+            if (player.lives === 0) {
+                ctx.clearRect(0, 0, cvs.width, cvs.height);
+
+                ctx.font = "3rem Arial";
+                ctx.fillStyle = "white";                
+                let gameOverWidth = ctx.measureText("OOOOPS! Game Over!" ).width;
+                let restartWidth = ctx.measureText("Game will restart in 3 seconds" ).width;
+                ctx.fillText(`OOOOPS! Game Over!`, (cvs.width/2) - (gameOverWidth / 2), cvs.height/2-50);
+                ctx.fillText(`Game will restart in 3 seconds`, (cvs.width/2) - (restartWidth / 2), cvs.height/2 + 50);
+        
+                setTimeout(()=>{
+                ResetGame(ballProps, cvs, paddleProps, player, brickProps, bricksArr);
+                requestAnimationFrame(createBall);
+                } , 3000);
+                return;
+            }
 
             requestAnimationFrame(createBall);
         };

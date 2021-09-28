@@ -9,7 +9,6 @@ export default function AllBricksBroken(bricksArr, cvs,  ballProps, player) {
     }
   }
   if (total === bricksArr.length) {
-    alert("all broken");
     player.level++;
     ballProps.y = cvs.height - 20;
     brickProps.y=70;
