@@ -13,7 +13,7 @@ export default function AllBricksBroken(bricksArr, cvs,  ballProps, player) {
   // if all bricks are broken, game level should increased by 1
   if (total === bricksArr.length) {
     player.level++;
-    ballProps.y = cvs.height - 20;
+    ballProps.y = 400;
     brickProps.y=70;
   }
 }
