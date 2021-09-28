@@ -7,6 +7,7 @@ import Brick from './Brick';
 import BrickCollisionWithBall from '../../utils/BrickCollisionWithBall';
 import PaddleCollisionWithBall from './PaddleCollisionWithBall';
 import PlayerRecord from './PlayerRecord';
+import AllBricksBroken from '../../utils/AllBricksBroken';
 
 const Board = () => {
     const canvas_Ref = useRef(null);
@@ -18,7 +19,7 @@ const Board = () => {
             const cvs = canvas_Ref.current;
             const ctx = cvs.getContext('2d');
             ctx.clearRect(0, 0, cvs.width, cvs.height);
-            let brickToDisplay = Brick(2, bricksArr, cvs, brickProps);
+            let brickToDisplay = Brick(player.level, bricksArr, cvs, brickProps);
             if (brickToDisplay && brickToDisplay.length>0){
                 bricksArr = brickToDisplay;
             }
@@ -55,6 +56,9 @@ const Board = () => {
             PaddleCollisionWithBall(ballProps, paddleProps);
 
             PlayerRecord(ctx, player, cvs);
+
+            AllBricksBroken(bricksArr, cvs, ballProps, player);
+
             requestAnimationFrame(createBall);
         };
         createBall();

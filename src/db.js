@@ -1,7 +1,7 @@
 export default {
     ballProps: {
       x: 20,
-      y: 200,
+      y: 400,
       dx: 5,
       dy: 5,
       radius: 15,
