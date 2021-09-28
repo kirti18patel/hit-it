@@ -17,13 +17,12 @@ export default {
       height: 30,
       width: 200,
       x: 100,
-      colors:  ["red", "white"]
+      color: "white"
     },
     brickProps: {
       x: 0.5,
       y: 70,
       height: 30,
-      density: 2,
       color: "white"
     }
   };
