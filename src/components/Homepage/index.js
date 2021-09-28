@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -36,8 +35,6 @@ function Homepage() {
             <div className="start-card" >
                 <Box component="div" className={styles.label1}>𝓗𝓲𝓽 𝓘𝓽</Box>
                 <Box component="div" className={styles.label2}>Are you ready to play game?</Box>
-                <TextField placeholder="Your name" style={{fontSize: 50}}/>
-
                 <Link to={"/game"} className={styles.link}>
                     <Button style={{fontSize: 50}}> 
                             Start game
