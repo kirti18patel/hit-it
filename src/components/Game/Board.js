@@ -16,10 +16,10 @@ const Board = () => {
 
     // destructuring of data
     let {ballProps, paddleProps, brickProps, player} = data;
-    let bricksArr =[];
 
     // execute only once when page rendered
     useEffect(()=>{
+        let bricksArr =[];
         const createBall = () => {
             // start designing canvas for game
             const cvs = canvas_Ref.current;
@@ -75,17 +75,24 @@ const Board = () => {
             // check if all bricks are broken or not
             AllBricksBroken(bricksArr, cvs, ballProps, player);
 
-            // check if game is over based on lives
-            if (player.lives === 0) {
+            // check if game is over based on lives or highest level
+            if (player.lives === 0 || player.level === 7) {
                 // clear canvas and show game over canvas
                 ctx.clearRect(0, 0, cvs.width, cvs.height);
                 ctx.font = "3rem Arial";
                 ctx.fillStyle = "white";                
                 let gameOverWidth = ctx.measureText("OOOOPS! Game Over!" ).width;
+                let highestLevelWidth = ctx.measureText("You have reached highest level!" ).width;
                 let restartWidth = ctx.measureText("Game will restart in 3 seconds" ).width;
-                ctx.fillText(`OOOOPS! Game Over!`, (cvs.width/2) - (gameOverWidth / 2), cvs.height/2-50);
+
+                if(player.level === 7){
+                    ctx.fillText(`You have reached highest level!`, (cvs.width/2) - (highestLevelWidth / 2), cvs.height/2-50);
+                }
+                else if (player.lives === 0){
+                    ctx.fillText(`OOOOPS! Game Over!`, (cvs.width/2) - (gameOverWidth / 2), cvs.height/2-50);
+                }
                 ctx.fillText(`Game will restart in 3 seconds`, (cvs.width/2) - (restartWidth / 2), cvs.height/2 + 50);
-        
+                
                 // restart the game after 3seconds
                 setTimeout(()=>{
                     ResetGame(ballProps, cvs, paddleProps, player, brickProps, bricksArr);
@@ -97,7 +104,7 @@ const Board = () => {
             requestAnimationFrame(createBall);
         };
         createBall();
-    }, [])
+    }, [ballProps, brickProps, player, paddleProps])
 
     // event handlers onMouse and left/right arrow key onKeydown
     const handlePaddleMouse = event => {

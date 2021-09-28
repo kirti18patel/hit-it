@@ -15,8 +15,7 @@ export default function Brick(level, bricksArr, cvs, brick) {
       brick.x + brick.width,
       brick.y,
       brick.width,
-      brick.height,
-      brick.color
+      brick.height
     );
     newbricks.push(newBrick);
     brick.x += brick.width + 5;
@@ -29,12 +28,12 @@ export default function Brick(level, bricksArr, cvs, brick) {
 }
 
 class SingleBrick {
-  constructor(x, y, width, height, color) {
+  constructor(x, y, width, height) {
       this.x = x - width;
       this.y = y;
       this.width = width;
       this.height = height;
-      this.color = color;
+      this.color = `rgb(${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)})`;
       this.broke = false;
   }
   draw(ctx) {

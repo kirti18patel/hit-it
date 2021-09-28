@@ -8,7 +8,6 @@ export default {
       speed: 10
     },
     player: {
-      name: "Player",
       lives: 5,
       score: 0,
       level: 1
@@ -22,7 +21,6 @@ export default {
     brickProps: {
       x: 0.5,
       y: 70,
-      height: 30,
-      color: "white"
+      height: 30
     }
   };
